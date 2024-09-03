@@ -10,9 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_02_182733) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_03_153932) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bookings", force: :cascade do |t|
+    t.date "date_start", null: false
+    t.date "date_finish", null: false
+    t.decimal "final_price", precision: 10, scale: 2
+    t.integer "user_id", null: false
+    t.integer "room_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.text "comment", null: false
+    t.decimal "rating", precision: 5, scale: 2, null: false
+    t.integer "booking_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description", null: false
+    t.string "address", null: false
+    t.integer "capacity_max", null: false
+    t.boolean "pets", default: false
+    t.boolean "wifi", default: false
+    t.boolean "parking", default: false
+    t.decimal "price", precision: 10, scale: 2, null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -42,4 +74,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_02_182733) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "bookings", "rooms"
+  add_foreign_key "bookings", "users"
+  add_foreign_key "reviews", "bookings"
+  add_foreign_key "rooms", "users"
 end
