@@ -15,7 +15,7 @@ class RoomsController < ApplicationController
   def create
     @room = Room.new(room_params)
     if @room.save
-      redirect_to @room, notice: 'Room was successfully created.'
+      redirect_to @room, notice: 'La habitación fue creada exitosamente.'
     else
       render :new
     end
@@ -28,7 +28,7 @@ class RoomsController < ApplicationController
   def update
     @room = Room.find(params[:id])
     if @room.update(room_params)
-      redirect_to @room, notice: 'Room was successfully updated.'
+      redirect_to @room, notice: 'La habitación se actualizó correctamente.'
     else
       render :edit
     end
@@ -37,7 +37,7 @@ class RoomsController < ApplicationController
   def destroy
     @room = Room.find(params[:id])
     @room.destroy
-    redirect_to rooms_path, notice: 'Room was successfully deleted.'
+    redirect_to rooms_path, notice: 'La habitación fue eliminada exitosamente.'
   end
 
   private
