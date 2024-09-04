@@ -1,0 +1,16 @@
+.card {
+  border: 2px black solid;
+  padding: 10px;
+  width: 200px;
+
+  img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+    border-radius: 20px;
+  }
+
+  h5, h6 {
+    margin: 5px 0;
+  }
+}
