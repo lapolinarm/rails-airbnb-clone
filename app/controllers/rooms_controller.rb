@@ -17,7 +17,7 @@ class RoomsController < ApplicationController
     if @room.save
       redirect_to @room, notice: 'La habitación fue creada exitosamente.'
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -30,7 +30,7 @@ class RoomsController < ApplicationController
     if @room.update(room_params)
       redirect_to @room, notice: 'La habitación se actualizó correctamente.'
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 

@@ -1,9 +1,2 @@
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
-<% @rooms.each do |room| %>
-  <div><%= room.name %></div>
-  <div><%= room.address %></div>
-  <div><%= number_to_currency(room.price)%> noche</div>
-  <div>Average Rating: <%= room.average_rating %></div>
-  <br>
-<% end %>
