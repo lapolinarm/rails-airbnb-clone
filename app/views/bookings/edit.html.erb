@@ -1,1 +1,5 @@
-<%= render 'form' %>
+<%= simple_form_for @booking do |f| %>
+  <%= f.input :date_start, label:"Fecha de inicio" %>
+  <%= f.input :date_finish, label:"Fecha de fin" %>
+  <%= f.submit "Guardar Reserva", class: "btn btn-primary" %>
+<% end %>
