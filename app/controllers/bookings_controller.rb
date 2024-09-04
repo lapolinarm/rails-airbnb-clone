@@ -1,14 +1,15 @@
 class BookingsController < ApplicationController
   def index
     @bookings = Booking.all
+    @room = Room.all
   end
   def show
     @booking = Booking.find(params[:id])
   end
 
   def new
-    @booking = Booking.new
     @room = Room.find(params[:room_id])
+    @booking = Booking.new
   end
 
   def create
@@ -39,7 +40,7 @@ class BookingsController < ApplicationController
   def destroy
     @booking = Booking.find(params[:id])
     @booking.destroy
-    redirect_to bookings_path, notice: 'Reserva eliminada exitosamente.'
+    redirect_to bookings_path(@booking.room), notice: 'Reserva eliminada exitosamente.'
   end
 
   private
