@@ -1,0 +1,9 @@
+<div class="card">
+  <img src="https://res.cloudinary.com/roldan-cloudinary/image/upload/v1715024229/logo_ysq0ba.jpg" alt="img">
+  <h5> <%= card.name %></h5>
+  <h6> <%= card.address %></h6>
+  <p>Caracteristicas: <%= card.description %> </p>
+  <p>Rango de fechas: ...</p>
+  <h5><%= number_to_currency(card.price) %> noche</h5>
+  <%= link_to "More info", room_path(card) %>
+</div>
