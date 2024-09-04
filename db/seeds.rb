@@ -83,6 +83,7 @@ reservas.each do |reserva|
     rating: rand(0.0..5.0).round(2),                 # Calificación aleatoria entre 0 y 5 con decimales
     booking: reserva                                # Reserva a la que pertenece la reseña
   )
+
 end
 
 puts "Proceso finalizado..."
