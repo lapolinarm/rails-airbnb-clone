@@ -1,8 +1,20 @@
-puts "Borrando usuarios, habitaciones, reservas y reseñas..."
-User.destroy_all # Elimina todos los usuarios existentes
-Room.destroy_all # Elimina todas las habitaciones existentes
-Booking.destroy_all # Elimina todas las reservas existentes
+puts "Borrando reseñas..."
 Review.destroy_all # Elimina todas las reseñas existentes
+
+puts "Borrando reservas..."
+Booking.destroy_all # Elimina todas las reservas existentes
+
+puts "Borrando habitaciones..."
+Room.destroy_all # Elimina todas las habitaciones existentes
+
+puts "Borrando usuarios..."
+User.destroy_all # Elimina todos los usuarios existentes
+
+puts "Reseteando secuencias de ID..."
+ActiveRecord::Base.connection.reset_pk_sequence!('users')
+ActiveRecord::Base.connection.reset_pk_sequence!('rooms')
+ActiveRecord::Base.connection.reset_pk_sequence!('bookings')
+ActiveRecord::Base.connection.reset_pk_sequence!('reviews')
 
 puts "Creando usuarios aleatorios..."
 40.times do
@@ -13,16 +25,21 @@ puts "Creando usuarios aleatorios..."
     password: "password"                # Contraseña fija para usuarios aleatorios
   )
 
+  # Genera una ciudad y país para la habitación
+  city = Faker::Address.city
+  country = Faker::Address.country
+  room_name = "#{city}, #{country}"
+
   Room.create(
-    name: Faker::Lorem.sentence(word_count: 3, supplemental: true), # Nombre descriptivo aleatorio
-    description: Faker::Lorem.paragraph(sentence_count: 2),        # Descripción aleatoria
-    address: Faker::Address.street_address + ", " + Faker::Address.city + ", " + Faker::Address.country, # Dirección en Latinoamérica
-    capacity_max: rand(1..5),                                      # Capacidad máxima aleatoria entre 1 y 5
-    pets: [true, false].sample,                                    # Permite mascotas aleatorio
-    wifi: [true, false].sample,                                    # Tiene wifi aleatorio
-    parking: [true, false].sample,                                 # Tiene estacionamiento aleatorio
-    price: rand(100.0..1000.0).round(2),                           # Precio aleatorio entre 100 y 1000
-    user: user                                                     # Asocia la habitación al usuario creado
+    name: room_name,                    # Nombre basado en la ciudad y país
+    description: Faker::Lorem.paragraph_by_chars(number: 300, supplemental: true),  # Descripción más larga y realista
+    address: Faker::Address.street_address, # Dirección relacionada con la ciudad y país
+    capacity_max: rand(1..5),            # Capacidad máxima aleatoria entre 1 y 5
+    pets: [true, false].sample,          # Permite mascotas aleatorio
+    wifi: [true, false].sample,          # Tiene wifi aleatorio
+    parking: [true, false].sample,       # Tiene estacionamiento aleatorio
+    price: rand(100.0..1000.0).round(2), # Precio aleatorio entre 100 y 1000
+    user: user                           # Asocia la habitación al usuario creado
   )
 end
 
@@ -42,16 +59,21 @@ usuarios.each do |user_data|
     password: "123456"                   # Contraseña fija para usuarios específicos
   )
 
+  # Genera una ciudad y país para la habitación
+  city = Faker::Address.city
+  country = Faker::Address.country
+  room_name = "#{city}, #{country}"
+
   Room.create(
-    name: Faker::Lorem.sentence(word_count: 3, supplemental: true),
-    description: Faker::Lorem.paragraph(sentence_count: 2),
-    address: Faker::Address.street_address + ", " + Faker::Address.city + ", " + Faker::Address.country,
-    capacity_max: rand(1..5),
-    pets: [true, false].sample,
-    wifi: [true, false].sample,
-    parking: [true, false].sample,
-    price: rand(100.0..1000.0).round(2),
-    user: user
+    name: room_name,                    # Nombre basado en la ciudad y país
+    description: Faker::Lorem.paragraph_by_chars(number: 300, supplemental: true),  # Descripción más larga y realista
+    address: Faker::Address.street_address, # Dirección
+    capacity_max: rand(1..5),            # Capacidad máxima aleatoria entre 1 y 5
+    pets: [true, false].sample,          # Permite mascotas aleatorio
+    wifi: [true, false].sample,          # Tiene wifi aleatorio
+    parking: [true, false].sample,       # Tiene estacionamiento aleatorio
+    price: rand(100.0..1000.0).round(2), # Precio aleatorio entre 100 y 1000
+    user: user                           # Asocia la habitación al usuario creado
   )
 end
 
