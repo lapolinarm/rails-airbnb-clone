@@ -1,7 +1,48 @@
-<%= simple_form_for @booking do |f| %>
-  <%= f.input :date_start, label:"Fecha de inicio" %>
-  <%= f.input :date_finish, label:"Fecha de fin" %>
-  <%= f.submit "Guardar Reserva", class: "btn btn-primary" %>
-<% end %>
+<%# <%= simple_form_for @booking do |f| %>
+  <%# <%= f.input :date_start, label:"Fecha de inicio" %>
+  <%# <%= f.input :date_finish, label:"Fecha de fin" %>
+  <%# <%= f.submit "Guardar Reserva", class: "btn btn-primary" %>
+<%# <% end %>
 
+<%# <div class="container"> %>
+  <%# <h1><%= @booking.new_record? ? 'Nueva Reserva' : 'Editar Reserva' </h1> %>
+  <%# <%= simple_form_for(@booking, html: { class: "form-horizontal" }) do |f| %>
+    <%# <div class="form-group"> %>
+      <%# <%= f.input :date_start, label: "Fecha de inicio", input_html: { class: "form-control" } %>
+    <%# </div> %>
+    <%# <div class="form-group"> %>
+      <%# <%= f.input :date_finish, label: "Fecha de fin", input_html: { class: "form-control" } %>
+    <%# </div> %>
+    <%# <div class="form-group"> %>
+      <%# <%= f.submit @booking.new_record? ? 'Guardar Reserva' : 'Actualizar Reserva', class: "btn btn-primary" %>
+    <%# </div> %>
+  <%# <% end %>
+<%# </div> %>
 
+<div class="container-fluid mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-sm p-4">
+        <div class="card-body">
+
+          <h1 class="text-center mb-4"><%= @booking.new_record? ? 'Nueva Reserva' : 'Editar Reserva' %></h1>
+
+          <%= simple_form_for(@booking, html: { class: "form-horizontal" }) do |f| %>
+
+            <div class="form-group mb-3">
+              <%= f.input :date_start, label: "Fecha de inicio", input_html: { class: "form-control", type: "date" } %>
+            </div>
+
+            <div class="form-group mb-3">
+              <%= f.input :date_finish, label: "Fecha de fin", input_html: { class: "form-control", type: "date" } %>
+            </div>
+
+                        <div class="form-group text-center">
+              <%= f.submit @booking.new_record? ? 'Guardar Reserva' : 'Actualizar Reserva', class: "btn btn-primary btn-lg" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
