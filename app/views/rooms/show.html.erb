@@ -1,17 +1,16 @@
 <div class="container mt-4">
-  <!-- Título encima del contenedor de imágenes -->
-  <h1 class="main-title">R2#05_Habitación privada 15!</h1>
+  <!-- Título -->
+  <h1 class="main-title">Quédate en una habitación de <%= @room.user.first_name %> </h1>
 
   <div class="row">
-    <!-- Contenedor principal de imágenes -->
+    <!-- Imágenes de la habitación -->
     <div class="col-12">
       <div class="image-container d-flex rounded">
-        <!-- Imagen grande a la izquierda -->
+        <!-- Imagen grande -->
         <div class="main-image w-50 pe-2">
           <img src="<%= image_path 'image1.webp' %>" class="img-fluid rounded-start" alt="Living Room">
         </div>
-
-        <!-- Cuatro imágenes más pequeñas a la derecha -->
+        <!-- Imágenes pequeñas -->
         <div class="secondary-images w-50 ps-2">
           <div class="row g-2">
             <div class="col-6">
@@ -32,27 +31,30 @@
     </div>
   </div>
 
-  <!-- Información del anuncio -->
+  <!-- Detalles y formulario divididos en dos columnas -->
   <div class="row mt-4">
+    <!-- Lado izquierdo: Detalles de la habitación -->
     <div class="col-md-8">
-      <p class="location">Habitación en Marrakesh, Marruecos</p>
-      <p class="details">1 cama doble · Baño privado en la habitación</p>
+      <p class="location">Habitación en <%= @room.address %> | <%= @room.name %></p>
+      <p class="details"><%= @room.capacity_max %> camas · Baño privado en la habitación</p>
       <div class="d-flex align-items-center mb-3">
         <i class="fa fa-star"></i>
-        <span class="ms-2 review">4.71 · 188 reseñas</span>
+        <span class="ms-2 review"><%= @room.average_rating %> · <%= @room.reviews.count %> reseñas</span>
+        <a href="#reviews-section" class="ms-2">⬇</a> <!-- Enlace hacia las reseñas -->
       </div>
       <hr>
+      <!-- Información del anfitrión -->
       <div class="host-info d-flex align-items-center">
         <img src="<%= image_path 'image1.webp' %>" class="avatar me-3" alt="Hiroki">
         <div>
-          <p class="host-name">Anfitrión: Hiroki</p>
-          <p class="host-years">9 años anfitrionando</p>
+          <p class="host-name">Anfitrión: <%= @room.user.first_name %> <%= @room.user.last_name %></p>
+          <p class="host-years"><%= (Time.zone.now.year - @room.user.created_at.year).ceil %> años anfitrionando</p> <!-- Cálculo de años -->
         </div>
       </div>
       <hr>
     </div>
 
-    <!-- Detalles del precio y formulario de reserva -->
+    <!-- Lado derecho: Formulario de reserva -->
     <div class="col-md-4">
       <div class="card p-3">
         <div class="d-flex align-items-baseline mb-3">
@@ -75,8 +77,32 @@
             <option value="3">3 huéspedes</option>
           </select>
         </div>
-        <button class="btn btn-primary w-100 mt-3">Reservar</button>
+        <!-- Botón de Reservar -->
+        <%= link_to 'Reservar', new_room_booking_path(room_id: @room.id), class: 'btn btn-primary' %>
       </div>
     </div>
+  </div>
+
+  <!-- Sección de reseñas -->
+  <div id="reviews-section" class="row mt-4">
+    <% @room.reviews.each do |review| %>
+      <div class="col-md-6 mb-4">
+        <div class="d-flex">
+          <!-- Avatar y nombre del usuario -->
+          <img src="<%= image_path 'image1.webp' %>" class="avatar me-3" alt="<%= review.booking.user.first_name %>">
+          <div>
+            <p class="reviewer-name"><%= review.booking.user.first_name %> <%= review.booking.user.last_name %></p>
+            <p><%= (Time.zone.now.year - review.booking.user.created_at.year).ceil %> años en Airbnb</p>
+          </div>
+        </div>
+        <!-- Reseña y calificación -->
+        <div>
+          <p>Calificación: <%= review.rating %> estrellas</p>
+          <p class="review-date"><%= review.created_at.strftime("%d/%m/%Y") %></p>
+          <p class="review-text"><%= review.comment %></p>
+        </div>
+        <hr>
+      </div>
+    <% end %>
   </div>
 </div>
