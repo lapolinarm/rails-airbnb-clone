@@ -1,3 +1,5 @@
 <h1>Airbnb</h1>
 <p>Encuentra el perfecto lugar para tu destino</p>
-<%= render 'shared/cards_container_for_rooms_index' %>
+<div class="row row-cols-4 gap-5">
+  <%= render RoomCardComponent.with_collection(@rooms) %>
+</div>
