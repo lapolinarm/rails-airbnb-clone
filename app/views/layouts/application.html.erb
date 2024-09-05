@@ -11,10 +11,12 @@
   </head>
 
   <body>
-    <div class="container">
+    <div>
       <%= render 'shared/navbar' %>
+      <div class="mt-5 mx-5">
       <%= render 'shared/flashes' %>
       <%= yield %>
+      </div>
     </div>
   </body>
 </html>
