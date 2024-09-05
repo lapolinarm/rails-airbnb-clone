@@ -1,4 +1,5 @@
 class RoomsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index, :show] # Permitir acceso a index y show sin login
   def index
     @rooms = Room.all
   end

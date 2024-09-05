@@ -1,4 +1,5 @@
 class BookingsController < ApplicationController
+  before_action :authenticate_user!, only: [:create]
   def index
     @bookings = Booking.all
     @room = Room.all
@@ -13,15 +14,26 @@ class BookingsController < ApplicationController
   end
 
   def create
-    @booking = current_user.bookings.build(booking_params)
-    @booking.room = Room.find(params[:room_id])
+    if user_signed_in?
+      @booking = current_user.bookings.build(booking_params)
+      @booking.room = Room.find(params[:room_id])
 
-    if @booking.save
-      redirect_to @booking, notice: 'Reserva creada exitosamente.'
+      if @booking.save
+        redirect_to @booking, notice: 'Reserva creada exitosamente.'
+      else
+        render :new, status: :unprocessable_entity
+      end
     else
-      render :new, status: :unprocessable_entity
+      # Guardar los datos de la reserva temporalmente en la sesión
+      session[:pending_booking] = {
+        room_id: params[:room_id],
+        booking: booking_params
+      }
+      # Redirigir al login
+      redirect_to new_user_session_path, alert: 'Necesitas iniciar sesión para continuar.'
     end
   end
+
   def edit
   @booking = Booking.find(params[:id])
   @room = @booking.room
