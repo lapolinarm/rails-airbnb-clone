@@ -1,9 +1,10 @@
 <%= link_to @room do %>
   <div class="card">
-    <img src="https://res.cloudinary.com/roldan-cloudinary/image/upload/v1715024229/logo_ysq0ba.jpg" alt="img">
-    <h5><%= @room.name %></h5>
-    <h6><%= @room.description %></h6>
-    <h6><%= @room.address %></h6>
-    <h5><%= @room.price %></h5>
+    <img src="https://res.cloudinary.com/roldan-cloudinary/image/upload/v1725566367/airbnbimage_2_sd8f0s.webp" alt="img">
+    <div class="card-body">
+      <h5><%= @room.name %></h5>
+      <h6><%= @room.address %></h6>
+      <h5>S/ <%= @room.price %></h5>
+    </div>
   </div>
 <% end %>

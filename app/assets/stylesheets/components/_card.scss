@@ -1,7 +1,7 @@
 .card {
-  border: 2px black solid;
-  padding: 10px;
-  width: 200px;
+  // border: 2px black solid;
+  margin-bottom: 5rem;
+  border-radius: 20px;
 
   img {
     width: 100%;
@@ -10,7 +10,4 @@
     border-radius: 20px;
   }
 
-  h5, h6 {
-    margin: 5px 0;
-  }
 }
