@@ -1,2 +1,52 @@
-<h1>Rooms#show</h1>
-<p>Find me in app/views/rooms/show.html.erb</p>
+<h1>
+  <%= @room.name %>
+  <%= @room.average_rating %>
+</h1>
+
+<p><strong>Descripción:</strong> <%= @room.description %></p>
+<p><strong>Dirección:</strong> <%= @room.address %></p>
+<p><strong>Capacidad Máxima:</strong> <%= @room.capacity_max %> personas</p>
+<p><strong>Mascotas Permitidas:</strong> <%= @room.pets ? 'Sí' : 'No' %></p>
+<p><strong>WiFi:</strong> <%= @room.wifi ? 'Sí' : 'No' %></p>
+<p><strong>Estacionamiento:</strong> <%= @room.parking ? 'Sí' : 'No' %></p>
+<p><strong>Precio por noche:</strong> <%= number_to_currency(@room.price) %></p>
+
+<h2>Propietario</h2>
+<p><%= @room.user.first_name %> <%= @room.user.last_name %></p>
+<p><%= @room.user.email %></p>
+
+<!-- Botón de Reservar -->
+<%= link_to 'Reservar', bookings_path(room_id: @room.id), class: 'btn btn-primary' %>
+
+<h2>Reservas</h2>
+<% if @room.bookings.any? %>
+  <ul>
+    <% @room.bookings.each do |booking| %>
+      <li>
+        <strong>Fecha Inicio:</strong> <%= booking.date_start %> |
+        <strong>Fecha Fin:</strong> <%= booking.date_finish %> |
+        <strong>Precio Final:</strong> <%= number_to_currency(booking.final_price) %> |
+        <strong>Usuario:</strong> <%= booking.user.first_name %> <%= booking.user.last_name %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No hay reservas para esta habitación.</p>
+<% end %>
+
+<h2>Reseñas</h2>
+<% if @room.bookings.joins(:reviews).any? %>
+  <ul>
+    <% @room.bookings.each do |booking| %>
+      <% booking.reviews.each do |review| %>
+        <li>
+          <strong>Calificación:</strong> <%= review.rating %> |
+          <strong>Comentario:</strong> <%= review.comment %> |
+          <strong>Fecha:</strong> <%= review.created_at.strftime('%d/%m/%Y') %>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No hay reseñas para esta habitación.</p>
+<% end %>
