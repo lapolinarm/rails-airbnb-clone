@@ -1,3 +1,5 @@
 <h1>Bienvenido a Airbnb</h1>
 <h3>Donde cada hogar se convierte en un destino</h3>
-<%= render 'shared/cards_container' %>
+<div class="row row-cols-4 gap-5">
+  <%= render RoomCardComponent.with_collection(@rooms) %>
+</div>
