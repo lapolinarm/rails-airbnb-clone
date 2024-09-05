@@ -1,52 +1,82 @@
-<h1>
-  <%= @room.name %>
-  <%= @room.average_rating %>
-</h1>
+<div class="container mt-4">
+  <!-- Título encima del contenedor de imágenes -->
+  <h1 class="main-title">R2#05_Habitación privada 15!</h1>
 
-<p><strong>Descripción:</strong> <%= @room.description %></p>
-<p><strong>Dirección:</strong> <%= @room.address %></p>
-<p><strong>Capacidad Máxima:</strong> <%= @room.capacity_max %> personas</p>
-<p><strong>Mascotas Permitidas:</strong> <%= @room.pets ? 'Sí' : 'No' %></p>
-<p><strong>WiFi:</strong> <%= @room.wifi ? 'Sí' : 'No' %></p>
-<p><strong>Estacionamiento:</strong> <%= @room.parking ? 'Sí' : 'No' %></p>
-<p><strong>Precio por noche:</strong> <%= number_to_currency(@room.price) %></p>
+  <div class="row">
+    <!-- Contenedor principal de imágenes -->
+    <div class="col-12">
+      <div class="image-container d-flex rounded">
+        <!-- Imagen grande a la izquierda -->
+        <div class="main-image w-50 pe-2">
+          <img src="<%= image_path 'image1.webp' %>" class="img-fluid rounded-start" alt="Living Room">
+        </div>
 
-<h2>Propietario</h2>
-<p><%= @room.user.first_name %> <%= @room.user.last_name %></p>
-<p><%= @room.user.email %></p>
+        <!-- Cuatro imágenes más pequeñas a la derecha -->
+        <div class="secondary-images w-50 ps-2">
+          <div class="row g-2">
+            <div class="col-6">
+              <img src="<%= image_path 'image1.webp' %>" class="img-fluid rounded" alt="Bedroom">
+            </div>
+            <div class="col-6">
+              <img src="<%= image_path 'image1.webp' %>" class="img-fluid rounded" alt="Light Fixture">
+            </div>
+            <div class="col-6">
+              <img src="<%= image_path 'image1.webp' %>" class="img-fluid rounded" alt="Bathroom">
+            </div>
+            <div class="col-6">
+              <img src="<%= image_path 'image1.webp' %>" class="img-fluid rounded" alt="Decoration">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<!-- Botón de Reservar -->
-<%= link_to 'Reservar', bookings_path(room_id: @room.id), class: 'btn btn-primary' %>
+  <!-- Información del anuncio -->
+  <div class="row mt-4">
+    <div class="col-md-8">
+      <p class="location">Habitación en Marrakesh, Marruecos</p>
+      <p class="details">1 cama doble · Baño privado en la habitación</p>
+      <div class="d-flex align-items-center mb-3">
+        <i class="fa fa-star"></i>
+        <span class="ms-2 review">4.71 · 188 reseñas</span>
+      </div>
+      <hr>
+      <div class="host-info d-flex align-items-center">
+        <img src="<%= image_path 'image1.webp' %>" class="avatar me-3" alt="Hiroki">
+        <div>
+          <p class="host-name">Anfitrión: Hiroki</p>
+          <p class="host-years">9 años anfitrionando</p>
+        </div>
+      </div>
+      <hr>
+    </div>
 
-<h2>Reservas</h2>
-<% if @room.bookings.any? %>
-  <ul>
-    <% @room.bookings.each do |booking| %>
-      <li>
-        <strong>Fecha Inicio:</strong> <%= booking.date_start %> |
-        <strong>Fecha Fin:</strong> <%= booking.date_finish %> |
-        <strong>Precio Final:</strong> <%= number_to_currency(booking.final_price) %> |
-        <strong>Usuario:</strong> <%= booking.user.first_name %> <%= booking.user.last_name %>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>No hay reservas para esta habitación.</p>
-<% end %>
-
-<h2>Reseñas</h2>
-<% if @room.bookings.joins(:reviews).any? %>
-  <ul>
-    <% @room.bookings.each do |booking| %>
-      <% booking.reviews.each do |review| %>
-        <li>
-          <strong>Calificación:</strong> <%= review.rating %> |
-          <strong>Comentario:</strong> <%= review.comment %> |
-          <strong>Fecha:</strong> <%= review.created_at.strftime('%d/%m/%Y') %>
-        </li>
-      <% end %>
-    <% end %>
-  </ul>
-<% else %>
-  <p>No hay reseñas para esta habitación.</p>
-<% end %>
+    <!-- Detalles del precio y formulario de reserva -->
+    <div class="col-md-4">
+      <div class="card p-3">
+        <div class="d-flex align-items-baseline mb-3">
+          <h3>S/159</h3>
+          <span class="ms-2">noche</span>
+        </div>
+        <div class="mb-2">
+          <label for="check-in">Llegada</label>
+          <input type="date" class="form-control" id="check-in" value="2024-11-14">
+        </div>
+        <div class="mb-2">
+          <label for="check-out">Salida</label>
+          <input type="date" class="form-control" id="check-out" value="2024-11-19">
+        </div>
+        <div class="mb-2">
+          <label for="guests">Huéspedes</label>
+          <select class="form-select" id="guests">
+            <option value="1">1 huésped</option>
+            <option value="2">2 huéspedes</option>
+            <option value="3">3 huéspedes</option>
+          </select>
+        </div>
+        <button class="btn btn-primary w-100 mt-3">Reservar</button>
+      </div>
+    </div>
+  </div>
+</div>
