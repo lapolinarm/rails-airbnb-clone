@@ -52,6 +52,7 @@ gem "sassc-rails"
 gem "devise"
 gem "faker"
 gem "view_component"
+gem "flatpickr"
 
 group :development, :test do
   gem "dotenv-rails"
