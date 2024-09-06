@@ -147,32 +147,7 @@
     </div>
 
         <!-- Lado derecho: Formulario de reserva -->
-    <div class="col-md-4">
-      <div class="card p-4 shadow-sm">
-        <div class="d-flex align-items-baseline mb-3">
-          <h3 class="mb-0"><%= number_to_currency(@room.price) %></h3>
-          <span class="ms-2 text-muted">noche</span>
-        </div>
-        <div class="mb-3">
-          <label for="check-in" class="form-label">Llegada</label>
-          <input type="date" class="form-control" id="check-in" value="<%= Date.today %>">
-        </div>
-        <div class="mb-3">
-          <label for="check-out" class="form-label">Salida</label>
-          <input type="date" class="form-control" id="check-out" value="<%= (Date.today + 2).strftime('%Y-%m-%d') %>">
-        </div>
-        <div class="mb-3">
-          <label for="guests" class="form-label">Huéspedes</label>
-          <select class="form-select" id="guests">
-            <% (1..@room.capacity_max).each do |num| %>
-              <option value="<%= num %>"><%= num %> huésped<%= 's' if num > 1 %></option>
-            <% end %>
-          </select>
-        </div>
-        <!-- Botón de Reservar -->
-        <%= link_to 'Reservar', new_room_booking_path(room_id: @room.id), class: 'btn btn-primary w-100' %>
-      </div>
-    </div>
+    <%= render "bookings/form", booking: @booking, room: @room %>
 
 
 
