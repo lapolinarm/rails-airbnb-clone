@@ -1,111 +1,218 @@
-<div class="container mt-4">
+<div class="container mt-5">
   <!-- Título -->
-  <h1 class="main-title">Quédate en una habitación de <%= @room.user.first_name %> </h1>
+  <h1 class="text-start mb-4" style="font-size: 34px; line-height: 34px; margin-left: 0;">Quédate en una habitación de <%= @room.user.first_name %></h1>
+
+
+
 
   <div class="row">
     <!-- Imágenes de la habitación -->
     <div class="col-12">
-      <div class="image-container d-flex rounded">
+      <div class="d-flex flex-column flex-md-row rounded shadow-lg overflow-hidden" style="max-height: 400px;">
         <!-- Imagen grande -->
-        <div class="main-image w-50 pe-2">
-          <img src="<%= image_path 'image1.webp' %>" class="img-fluid rounded-start" alt="Living Room">
+        <div class="w-100 w-md-50 pe-md-2" style="overflow: hidden;">
+          <img src="<%= image_path 'image1.webp' %>" class="img-fluid rounded-3" alt="Living Room" style="object-fit: cover; width: 100%; height: 100%;">
         </div>
         <!-- Imágenes pequeñas -->
-        <div class="secondary-images w-50 ps-2">
-          <div class="row g-2">
-            <div class="col-6">
-              <img src="<%= image_path 'image1.webp' %>" class="img-fluid rounded" alt="Bedroom">
-            </div>
-            <div class="col-6">
-              <img src="<%= image_path 'image1.webp' %>" class="img-fluid rounded" alt="Light Fixture">
-            </div>
-            <div class="col-6">
-              <img src="<%= image_path 'image1.webp' %>" class="img-fluid rounded" alt="Bathroom">
-            </div>
-            <div class="col-6">
-              <img src="<%= image_path 'image1.webp' %>" class="img-fluid rounded" alt="Decoration">
-            </div>
+        <div class="w-100 w-md-50 ps-md-2 mt-3 mt-md-0 d-flex flex-wrap" style="max-height: 100%; overflow: hidden;">
+          <div class="flex-fill" style="width: 50%; height: 50%; padding: 0.25rem;">
+            <img src="<%= image_path 'image1.webp' %>" class="img-fluid rounded-3" alt="Bedroom" style="object-fit: cover; width: 100%; height: 100%;">
+          </div>
+          <div class="flex-fill" style="width: 50%; height: 50%; padding: 0.25rem;">
+            <img src="<%= image_path 'image1.webp' %>" class="img-fluid rounded-3" alt="Light Fixture" style="object-fit: cover; width: 100%; height: 100%;">
+          </div>
+          <div class="flex-fill" style="width: 50%; height: 50%; padding: 0.25rem;">
+            <img src="<%= image_path 'image1.webp' %>" class="img-fluid rounded-3" alt="Bathroom" style="object-fit: cover; width: 100%; height: 100%;">
+          </div>
+          <div class="flex-fill" style="width: 50%; height: 50%; padding: 0.25rem;">
+            <img src="<%= image_path 'image1.webp' %>" class="img-fluid rounded-3" alt="Decoration" style="object-fit: cover; width: 100%; height: 100%;">
           </div>
         </div>
       </div>
     </div>
   </div>
 
+
+
+
+
   <!-- Detalles y formulario divididos en dos columnas -->
-  <div class="row mt-4">
+  <div class="row mt-5">
     <!-- Lado izquierdo: Detalles de la habitación -->
     <div class="col-md-8">
-      <p class="location">Habitación en <%= @room.address %> | <%= @room.name %></p>
-      <p class="details"><%= @room.capacity_max %> camas · Baño privado en la habitación</p>
-      <div class="d-flex align-items-center mb-3">
-        <i class="fa fa-star"></i>
-        <span class="ms-2 review">
-          <%= @room.average_rating %> ·<%= link_to "#{rand(30..80)} reseñas", '#reviews-section', class: 'ms-2' %>
-        </span>
-      </div>
-      <hr>
+      <p class="text-muted mb-1">Habitación en <%= @room.address %> | <%= @room.name %></p>
+      <p class="lead mb-3"><%= @room.capacity_max %> camas · Baño privado en la habitación</p>
+
+
+<div class="d-flex align-items-center mb-4">
+  <i class="fa fa-star text-warning" style="font-size: 1rem;"></i>
+  <span class="ms-2 fs-5">
+    <strong><%= @room.average_rating %></strong> · <%= link_to "#{rand(30..80)} reseñas", '#reviews-section', class: 'text-primary fw-bold' %>
+  </span>
+</div>
+
+
+      <hr class="my-4">
       <!-- Información del anfitrión -->
-      <div class="host-info d-flex align-items-center">
-        <img src="<%= image_path 'image1.webp' %>" class="avatar me-3" alt="Hiroki">
+      <div class="d-flex align-items-center mb-4">
+        <img src="<%= image_path 'image1.webp' %>" class="avatar me-3 rounded-circle border border-light" alt="Hiroki" style="width: 80px; height: 80px;">
         <div>
-          <p class="host-name">Anfitrión: <%= @room.user.first_name %> <%= @room.user.last_name %></p>
-          <p class="host-years"><%= rand(1..15) %> años anfitrionando</p>
+          <p class="fw-bold mb-1">Anfitrión: <%= @room.user.first_name %> <%= @room.user.last_name %></p>
+          <p class="text-muted mb-0"><%= rand(1..15) %> años anfitrionando</p>
         </div>
       </div>
-      <hr>
+      <hr class="my-4">
+
+
+
+      <!-- Sección de información adicional -->
+      <div class="row">
+        <div class="col-md-12">
+
+
+          <!-- Tarjeta de Información General -->
+          <div class="container">
+            <div class="row g-3">
+              <div class="col-lg-6 col-md-8 col-sm-12 mb-3">
+                <div class="card shadow-sm border-light p-2">
+                  <div class="card-body p-3">
+                    <div class="d-flex align-items-center mb-2">
+                      <i class="fa fa-bed me-2 text-primary" style="font-size: 1.25rem;"></i>
+                      <h5 class="card-title mb-0">Habitación en vivienda rentada</h5>
+                    </div>
+                    <p class="card-text small mb-0">Tu propia habitación en un alojamiento, más acceso a espacios compartidos.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6 col-md-8 col-sm-12 mb-3">
+                <div class="card shadow-sm border-light p-2">
+                  <div class="card-body p-3">
+                    <div class="d-flex align-items-center mb-2">
+                      <i class="fa fa-share-alt me-2 text-primary" style="font-size: 1.25rem;"></i>
+                      <h5 class="card-title mb-0">Espacios compartidos</h5>
+                    </div>
+                    <p class="card-text small mb-0">Compartirás algunas zonas del alojamiento con otros huéspedes.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6 col-md-8 col-sm-12 mb-3">
+                <div class="card shadow-sm border-light p-2">
+                  <div class="card-body p-3">
+                    <div class="d-flex align-items-center mb-2">
+                      <i class="fa fa-bath me-2 text-primary" style="font-size: 1.25rem;"></i>
+                      <h5 class="card-title mb-0">Baño privado en la habitación</h5>
+                    </div>
+                    <p class="card-text small mb-0">Este alojamiento tiene un baño al que se accede desde la habitación.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6 col-md-8 col-sm-12 mb-3">
+                <div class="card shadow-sm border-light p-2">
+                  <div class="card-body p-3">
+                    <div class="d-flex align-items-center mb-2">
+                      <i class="fa fa-wifi me-2 text-primary" style="font-size: 1.25rem;"></i>
+                      <h5 class="card-title mb-0">Zona de trabajo</h5>
+                    </div>
+                    <p class="card-text small mb-0">Una habitación con wifi que es ideal para trabajar y construir tus proyectos mientras disfrutas del paisaje.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sección Acerca de este lugar que ocupa todo el ancho -->
+            <div class="row">
+              <div class="col-12 mb-4">
+                <div class="card shadow-sm border-light">
+                  <div class="card-body">
+                    <h5 class="card-title" style="font-size: 1.5rem;">Acerca de este lugar</h5>
+                    <p class="card-text" style="font-size: 0.875rem;">¡Te damos la bienvenida a tu dormitorio principal recién renovado con baño completo privado situado en el corazón de la ciudad! Esta belleza de lujo se encuentra en el lugar perfecto para viajeros y parejas que buscan explorar la belleza de esta zona mientras se mantienen dentro del presupuesto. ¡El tren ligero está a 2 minutos a pie! ¡A 10-20 minutos en coche de ubicaciones privilegiadas (NYC, Downtown JC, Hoboken, EWR, comida, tiendas y más)! ¡Este apartamento se ve aún mejor en persona! ¡Wifi rápido, Smart TV, y mucho más para hacer de tu estancia una experiencia inolvidable!</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
     </div>
 
-    <!-- Lado derecho: Formulario de reserva -->
+        <!-- Lado derecho: Formulario de reserva -->
     <div class="col-md-4">
-      <div class="card p-3">
+      <div class="card p-4 shadow-sm">
         <div class="d-flex align-items-baseline mb-3">
-          <h3>S/159</h3>
-          <span class="ms-2">noche</span>
+          <h3 class="mb-0"><%= number_to_currency(@room.price) %></h3>
+          <span class="ms-2 text-muted">noche</span>
         </div>
-        <div class="mb-2">
-          <label for="check-in">Llegada</label>
-          <input type="date" class="form-control" id="check-in" value="2024-11-14">
+        <div class="mb-3">
+          <label for="check-in" class="form-label">Llegada</label>
+          <input type="date" class="form-control" id="check-in" value="<%= Date.today %>">
         </div>
-        <div class="mb-2">
-          <label for="check-out">Salida</label>
-          <input type="date" class="form-control" id="check-out" value="2024-11-19">
+        <div class="mb-3">
+          <label for="check-out" class="form-label">Salida</label>
+          <input type="date" class="form-control" id="check-out" value="<%= (Date.today + 2).strftime('%Y-%m-%d') %>">
         </div>
-        <div class="mb-2">
-          <label for="guests">Huéspedes</label>
+        <div class="mb-3">
+          <label for="guests" class="form-label">Huéspedes</label>
           <select class="form-select" id="guests">
-            <option value="1">1 huésped</option>
-            <option value="2">2 huéspedes</option>
-            <option value="3">3 huéspedes</option>
+            <% (1..@room.capacity_max).each do |num| %>
+              <option value="<%= num %>"><%= num %> huésped<%= 's' if num > 1 %></option>
+            <% end %>
           </select>
         </div>
         <!-- Botón de Reservar -->
-        <%= link_to 'Reservar', new_room_booking_path(room_id: @room.id), class: 'btn btn-primary' %>
+        <%= link_to 'Reservar', new_room_booking_path(room_id: @room.id), class: 'btn btn-primary w-100' %>
       </div>
+    </div>
+
+
+
+  </div>
+
+
+
+  <!-- Sección de reseñas -->
+  <div id="reviews-section" class="container mt-5">
+    <h3 class="mb-4">Reseñas</h3>
+    <div class="row g-4">
+      <% @room.reviews.each do |review| %>
+        <div class="col-md-6">
+          <div class="p-4 border rounded-5 shadow-sm" style="border-radius: 20px;">
+            <div class="d-flex align-items-start mb-3">
+              <!-- Avatar y nombre del usuario -->
+              <img src="<%= image_path 'image1.webp' %>" class="avatar rounded-circle border border-light" alt="<%= review.booking.user.first_name %>" style="width: 60px; height: 60px; border-radius: 50%;">
+              <div class="ms-3">
+                <h6 class="fw-bold mb-1"><%= review.booking.user.first_name %> <%= review.booking.user.last_name %></h6>
+                <p class="text-muted mb-1"><%= rand(0..15) %> años en Airbnb</p>
+                <p class="mb-1">
+                  Calificación:
+                  <span class="text-warning">
+                    <i class="fa fa-star"></i> <%= review.rating %> estrellas
+                  </span>
+                </p>
+                <% random_year = Time.zone.now.year - rand(1..15) %>
+                <% random_month = rand(1..12) %>
+                <p class="text-muted mb-1"><%= Date.new(random_year, random_month).strftime("%B de %Y") %></p>
+                <p class="mb-0"><%= review.comment %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 
-  <!-- Sección de reseñas -->
-  <div id="reviews-section" class="row mt-4">
-    <% @room.reviews.each do |review| %>
-      <div class="col-md-6 mb-4">
-        <div class="d-flex">
-          <!-- Avatar y nombre del usuario -->
-          <img src="<%= image_path 'image1.webp' %>" class="avatar me-3" alt="<%= review.booking.user.first_name %>">
-          <div>
-            <p class="reviewer-name"><%= review.booking.user.first_name %> <%= review.booking.user.last_name %></p>
-            <p><%= rand(0..15) %> años en Airbnb</p>
-          </div>
-        </div>
-        <!-- Reseña y calificación -->
-        <div>
-          <p>Calificación: <%= review.rating %> estrellas</p>
-          <% random_year = Time.zone.now.year - rand(1..15) %>
-          <% random_month = rand(1..12) %>
-          <p class="review-date"><%= Date.new(random_year, random_month).strftime("%B de %Y") %></p>
-          <p class="review-text"><%= review.comment %></p>
-        </div>
-        <hr>
-      </div>
-    <% end %>
-  </div>
+
+
+
+
 </div>
