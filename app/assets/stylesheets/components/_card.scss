@@ -1,6 +1,6 @@
 .card {
   // border: 2px black solid;
-  margin-bottom: 5rem;
+  // margin-bottom: 5rem; // 80px
   border-radius: 20px;
   transition: transform 0.3s ease;
 
@@ -11,6 +11,28 @@
     border-radius: 20px;
   }
 
+  h5 {
+    font-size: $font-size-title;
+  }
+
+  h6 {
+    font-size: $font-size-subtitle;
+    color: $fonts-gray;
+  }
+
+  #rating {
+    width: 20%;
+    gap: 5px;
+  }
+
+}
+
+#card_bottom_margin {
+  margin-bottom: 5rem;
+}
+
+#card-name {
+  width: 80%;
 }
 
 .card:hover {
