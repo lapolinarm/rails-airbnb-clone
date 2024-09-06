@@ -15,6 +15,6 @@ Rails.application.routes.draw do
   end
 
   resources :rooms do
-    resources :bookings, only: %i[new create]
+    resources :bookings, only: %i[create]
   end
 end
